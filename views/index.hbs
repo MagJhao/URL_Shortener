@@ -1,0 +1,39 @@
+<div class="container mt-5">
+  <div class="title d-flex justify-content-center mb-5">
+    <h1>
+      URL_Shortener
+    </h1>
+  </div>
+  <div class="picture d-flex justify-content-center mb-5" id="picture">
+    <img src="https://assets-lighthouse.alphacamp.co/uploads/image/file/16716/ExportedContentImage_00.png" alt="Picture" class="img-fluid">
+  </div>
+  {{#if shortURL}}
+  <div class="d-flex justify-content-center align-items-center flex-column">
+    <div class="result mb-3" >
+      <h3>Success! Please use this link:</h3>
+      <a href='http://localhost:3000/{{shortURL}}' id="generatedURL"  target="_blank" >http://localhost:3000/{{shortURL}}</a>
+    </div>
+    <button class="copy mb-3 btn btn-primary" onclick="copy()">Copy</button>
+    <a href="http://localhost:3000/"> home </a>
+    
+    <script>
+      function copy() {
+        const URL = document.querySelector("#generatedURL")
+        navigator.clipboard.writeText(URL.innerText)
+          .then(() => alert('已複製網址內容'))
+          .catch(error => console.log(error))
+      }
+    </script>
+  </div>
+  
+  {{else}}
+  <div id="'submit-bar" class="d-flex justify-content-center">
+    <form class="d-flex justify-content-center flex-column form" action="/shorten" method="POST">
+      <div class="mb-3">
+        <input type="url" class="form-control mb-1" name="inputURL" placeholder="Input URL here" aria-describedby="shorten-button" required>
+      </div>
+      <button type="submit" class="btn btn-primary" id="shorten-button">Shorten</button>
+    </form>
+  </div>
+  {{/if}}
+</div>
