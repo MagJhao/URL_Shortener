@@ -33,6 +33,7 @@ app.post('/shorten', (req, res) => {
     return;
   }
 
+  // 檢查原始網址是否已經有對應的縮短網址
   if (urlData[originalURL]) {
     const shortURL = urlData[originalURL];
     res.render('index', { shortURL });
@@ -40,6 +41,7 @@ app.post('/shorten', (req, res) => {
 
     const shortURL = Math.random().toString(36).substring(2, 7);
     
+    // 保存縮短的網址
     urlData[originalURL] = shortURL;
     fs.writeFileSync(dataFilePath, JSON.stringify(urlData), 'utf-8');
     
